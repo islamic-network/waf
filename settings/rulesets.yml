@@ -1,0 +1,54 @@
+rulesets: # these apply as AND rules
+  -
+    name: Ultimate Blacklist
+    blacklist:
+      -
+        ips: [123.456.78.9, 78.99.90.3] # where these ips
+        user_agents: [python-requests*] # and these agents
+        http_cookies: [cookie_one, another_cookie] # and these cookies
+        url_paths: [path/one, path/two] # and these paths match
+        until: 2018-7-28 14:22:59 # block until this time
+  -
+    name: Ultimate Whitelist
+    whitelist:
+      -
+        ips: [123.456.78.9, 78.99.90.3] # where these ips
+        user_agents: [python-reuqests/2.8] # and these agents
+        http_cookies: [cookie_one, another_cookie] # and these cookies
+        url_paths: [path/one, path/two] # and these paths match
+        until: forever # allow until this time
+  -
+    name: Rate Limit one
+    rate_limit:
+      per_day:
+        -
+          ips: [123.456.78.9, 78.99.90.3] # where these ips
+          user_agents: [python-reuqests/2.8] # and these agents
+          http_cookies: [cookie_one, another_cookie] # and these cookies
+          url_paths: [path/one, path/two] # and these paths match
+          query_strings: [key=value]
+          limit: 500
+      per_hour:
+        -
+          ips: [123.456.78.9, 78.99.90.3] # where these ips
+          user_agents: [python-reuqests/2.8] # and these agents
+          http_cookies: [cookie_one, another_cookie] # and these cookies
+          url_paths: [path/one, path/two] # and these paths match
+          limit: 67
+  -
+    name: Headers Manipulcation Sample
+    headers: 
+      inject: [name=value, name2=value2]
+      modify: [existingname=newvalue]
+      delete: [name1, name2, name3]
+  -
+    name: XSS prevention
+    query_filters: ['<script', 'alert='] 
+  -
+    name: Prevent SQL injection 
+    query_filters: ['SELECT', 'UPDATE', 'INSERT']
+  -
+    name: Block file extensions 
+    query_filters: ['xml', 'UPDATE', 'INSERT']
+
+     
