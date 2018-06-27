@@ -1,0 +1,24 @@
+{
+    "name": "islamic-network/waf",
+    "type": "library",
+    "description": "WAF built for the Islamic Network",
+    "authors": [
+        {
+            "name": "Meezaan-ud-Din Abdu Dhil-Jalali Wal-Ikram",
+            "email": "website@meezaan.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "IslamicNetwork\\Waf\\": "src/IslamicNetwork/Waf/",
+            "IslamicNetwork\\Memcached\\": "src/IslamicNetwork/Memcached"
+        }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0",
+        "phpunit/phpunit": "^7"
+    },
+    "require": {
+        "symfony/yaml": "^4.1"
+    }
+}
