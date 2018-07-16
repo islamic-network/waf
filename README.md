@@ -4,6 +4,8 @@ blacklist Response code 403
 whitelist
 ratelimit (per hour, per day, per minute, per second) Response code 429
 patching
+redirect
+rewrite
 
 
 ## Rules Paramters
@@ -32,3 +34,5 @@ whitelist
 blacklist
 ratelimit
 patching
+redirect
+rewrite

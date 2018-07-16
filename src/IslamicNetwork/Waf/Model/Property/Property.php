@@ -1,8 +1,9 @@
 <?php
 
 namespace IslamicNetwork\Waf\Model\Property;
+
 use IslamicNetwork\Waf\Model\Property\Config;
-use IslamicNetwork\Waf\Model\RuleSet\RuleSet;
+use IslamicNetwork\Waf\Model\Property\RuleSet;
 
 
 class Property
@@ -31,19 +32,35 @@ class Property
         }
     }
 
-    private function exists()
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    public function loadFromCache()
+    {}
+
+    public function saveToCache()
+    {}
+
+    public function exists()
     {
         return file_exists($this->path);
     }
 
-    private function validate()
+    public function validate()
     {
         if (!$this->isValid()) {
-
+             throw new Exception('Please ensure this property has the proper configuration.');
         }
     }
 
-    private function isValid()
+    public function isValid()
     {
         return $this->exists() 
             && $this->hasConfig()
@@ -51,24 +68,25 @@ class Property
             && $this->hasRuleSetsFolder();
     }
 
-    private function hasConfig()
+    public function hasConfig()
     {
         return file_exists($this->path . '/config.yml');
     }
 
-    private function hasDefaultRuleSet()
+    public function hasDefaultRuleSet()
     {
         return file_exists($this->path . '/default.yml');
     }
 
-    private function hasRuleSetsFolder()
+    public function hasRuleSetsFolder()
     {
         return file_exists($this->path . '/rulesets');
     }
 
-    private function loadConfig()
+    public function loadConfig()
     {
-        $this->config = new Config($this->path . '/config.yml');
+        $c = new Config($this->path . '/config.yml');
+        $this->config = $c->get();
     }
 
     private function loadRuleSets()
@@ -86,7 +104,8 @@ class Property
         $this->ruleSetFiles = array_keys(
             array_filter(
                 iterator_to_array($iterator), function($file) {
-                    if ($file->getExtension === 'yml') {      
+                    if ($file->getExtension === 'yml') {    
+                        // Add ruleset to array.  
                         $this->ruleSets[] = new RuleSet($file->getPathname());
                         return $file->isFile();
                     }
