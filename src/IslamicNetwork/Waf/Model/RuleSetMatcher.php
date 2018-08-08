@@ -62,6 +62,11 @@ class RuleSetMatcher
         return false;
     }
 
+    public function getMatched()
+    {
+        return $this->matched;
+    }
+
     public function isWhitelisted()
     {
         return $this->matchRules($this->ruleSet->getWhitelists(), self::WHITELIST);

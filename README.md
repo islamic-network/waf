@@ -1,3 +1,27 @@
+# usage
+```php
+<?php
+
+$ruleset = new RuleSet($file);
+$matcher = new \IslamicNetwork\Waf\Model\RuleSetMatcher($ruleset, $_REQUEST, $_SERVER);
+if ($matcher->isWhitelisted()) {
+    // Do nothing. Maybe append headers.
+}
+if ($matcher->isBlacklisted()) {
+    // Throw http 403
+}
+
+if ($matcher->isRatelimited()) {
+    $rl = new \IslamicNetwork\Waf\Model\RateLimit($memcached, $matcher->getMatched()['rate'], $matcher->getMatched()['time']);
+    if ($rl->isLimited()) {
+        // Throw http 429
+    }
+    
+}
+
+```
+
+
 # Rules
 
 blacklist Response code 403
