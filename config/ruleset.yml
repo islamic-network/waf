@@ -1,0 +1,65 @@
+# Note that values separated with a comma are always OR and each of the global keys are always AND
+blacklist:
+  - name: my blacklist # required
+    headers: # required
+      request: # required.HTTP_ appended
+        X-FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+        FORWARDED: [123.456.78.9, 78.99.90.3]
+        X_FORWARDED: [123.456.78.9, 78.99.90.3]
+        X_CLUSTER_CLIENT_IP: [123.456.78.9, 78.99.90.3]
+        CLIENT_IP: [123.456.78.9, 78.99.90.3]
+        USER-aGENT: [Mozilla/5.0, python-requests/2.8]
+        REFERER: [http://something.com, 'something else']
+        COOKIES: [cookie_one, another_cookie]
+      server: # required
+        rEQUEST_URI: [path/one, path/two]
+        QUERY_STRING: [one=yes&two=no&three=maybe, another=0&someother=1]
+
+whitelist:
+  - name: my whitelist # required
+    headers: # required
+      request: # required HTTP_ appended
+          X_FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+          FORWARDED: [123.456.78.9, 78.99.90.3]
+          X_FORWARDED: [123.456.78.9, 78.99.90.3]
+          X_CLUSTER_CLIENT_IP: [123.456.78.9, 78.99.90.3]
+          CLIENT_IP: [123.456.78.9, 78.99.90.3]
+          USER_AGENT: [Mozilla/5.0, python-requests/2.8]
+          REFERER: [http://something.com, 'something else']
+          COOKIES: [cookie_one, another_cookie]
+      server: # required
+          REQUEST_URI: [path/one, path/two]
+          QUERY_STRING: [one=yes&two=no&three=maybe]
+ratelimit:
+  - name: limiter # required
+    headers: # required
+      request: # required HTTP_ appended
+          X_FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+          FORWARDED: [123.456.78.9, 78.99.90.3]
+          X_FORWARDED: [123.456.78.9, 78.99.90.3]
+          X_CLUSTER_CLIENT_IP: [123.456.78.9, 78.99.90.3]
+          CLIENT_IP: [123.456.78.9, 78.99.90.3]
+          USER_AGENT: [Mozilla/5.0, python-requests/2.8]
+          REFERER: [http://something.com, 'something else']
+          COOKIES: [cookie_one, another_cookie]
+      server: # required
+          REQUEST_URI: [path/one, path/two]
+          QUERY_STRING: [one=yes&two=no&three=maybe]
+    limit:
+      hits: 1000
+      time: 3600 #60 = 1 minute, 3600 = 1 hour, 86400 = 1 day
+  - name: another limiter # required
+    headers: # required
+        request: # required HTTP_ appended
+            X_FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+            FORWARDED: [123.456.78.9, 78.99.90.3]
+            X_FORWARDED: [123.456.78.9, 78.99.90.3]
+            X_CLUSTER_CLIENT_IP: [123.456.78.9, 78.99.90.3]
+            CLIENT_IP: [123.456.78.9, 78.99.90.3]
+            USER_AGENT: [Mozilla/5.0, python-requests/2.8]
+            REFERER: [http://something.com, 'something else']
+            COOKIES: [cookie_one, another_cookie]
+        server: # required
+            REQUEST_URI: [path/one, path/two]
+            QUERY_STRING: [one=yes&two=no&three=maybe]
+    limit: [1000, 3600] # [hits, time in seconds] 60 = 1 minute, 3600 = 1 hour, 86400 = 1 day

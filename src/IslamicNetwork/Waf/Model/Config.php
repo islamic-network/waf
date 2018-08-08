@@ -1,6 +1,6 @@
 <?php
 
-namespace IslamicNetwork\Waf\Model\Property;
+namespace IslamicNetwork\Waf\Model;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
 
