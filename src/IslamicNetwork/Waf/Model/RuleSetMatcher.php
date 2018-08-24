@@ -31,10 +31,13 @@ class RuleSetMatcher
                 $res[] = true;
             }
         }
+
         if (in_array(true, $res)) {
+            // All do not fail.
             return false;
         }
 
+        // All failed.
         return true;
     }
 
