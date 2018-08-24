@@ -20,27 +20,46 @@ class RuleSetMatcher
         $this->ruleSet = $ruleSet;
     }
 
-    public function isAMatch($rule, $type)
+    private function doAllFail(array $value, $toMatch)
     {
-    // TODO: This won't work to match CIDR IP entries (it will only work for IP addresses currently). See answer by Samuel Parkinson on https://stackoverflow.com/questions/594112/matching-an-ip-to-a-cidr-mask-in-php-5
-    // to see how to deal with this issue.
-        foreach ($rule['headers']['request'] as $key => $value) {
-            if (isset($this->request[$key])) {
-                // If even one property of the rule does not exist in the request, it does not match, return false.
-                if(strpos($this->request[$key], $value) === false) {
-                    return false;
-                }
+        $res = [];
+        foreach ((array)$value as $vx) {
+            // Even if one of these CSV values is matched, this particular key is acceptable
+            if (strpos($toMatch, $vx) === false) {
+                $res[] = false;
+            } else {
+                $res[] = true;
             }
+        }
+        if (in_array(true, $res)) {
+            return false;
         }
 
-        foreach ($rule['headers']['server'] as $key => $value) {
-            if (isset($this->server[$key])) {
-                // If even one property of the rule does not exist in the server, it does not match, return false.
-                if(strpos($this->server[$key], $value) === false) {
-                    return false;
+        return true;
+    }
+
+    public function isAMatch($rule, $type)
+    {
+
+        // TODO: This won't work to match CIDR IP entries (it will only work for IP addresses currently). See answer by Samuel Parkinson on https://stackoverflow.com/questions/594112/matching-an-ip-to-a-cidr-mask-in-php-5
+        // to see how to deal with this issue.
+            foreach ((array)$rule['headers']['request'] as $key => $value) {
+                if (isset($this->request[$key])) {
+                    // Even if one key entirely fails, return false
+                    if ($this->doAllFail($value, $this->request[$key][0])) {
+                        return false;
+                    }
                 }
             }
-        }
+
+            foreach ((array)$rule['headers']['server'] as $key => $value) {
+                if (isset($this->server[$key])) {
+                    // Even if one key entirely fails, return false
+                    if ($this->doAllFail($value, $this->server[$key][0])) {
+                        return false;
+                    }
+                }
+            }
 
         return true;
     }

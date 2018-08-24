@@ -66,18 +66,21 @@ class RuleSet
 
     private function normaliseHeaderNames(array &$ruleset)
     {
-        foreach ($ruleset as $rsKey => $rs) {
-            foreach ($rs['headers']['request'] as $key => $value) {
-                unset( $ruleset[$rsKey]['headers']['request'][$key]);
-                $ruleset[$rsKey]['headers']['request']['HTTP_' . str_replace('-', '_', strtoupper($key))] = $value;
+        //if (isset($rs['headers']['request'])) {
+            foreach ($ruleset as $rsKey => $rs) {
+                foreach ($rs['headers']['request'] as $key => $value) {
+                    unset($ruleset[$rsKey]['headers']['request'][$key]);
+                    $ruleset[$rsKey]['headers']['request']['HTTP_' . str_replace('-', '_', strtoupper($key))] = $value;
+                }
             }
+       // }
 
-            foreach ($rs['headers']['server'] as $key => $value) {
-                unset( $ruleset[$rsKey]['headers']['server'][$key]);
-                $ruleset[$rsKey]['headers']['server'][str_replace('-', '_', strtoupper($key))] = $value;
+        if (isset($rs['headers']['server'])) {
+                foreach ($rs['headers']['server'] as $key => $value) {
+                    unset($ruleset[$rsKey]['headers']['server'][$key]);
+                    $ruleset[$rsKey]['headers']['server'][str_replace('-', '_', strtoupper($key))] = $value;
+                }
             }
-        }
-
     }
 
 }
