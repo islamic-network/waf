@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use IslamicNetwork\Waf\Model\RuleSet;
 use IslamicNetwork\Waf\Model\RuleSetMatcher;
 
-class RuleSetMatcherTest extends \PHPUnit\Framework\TestCase
+class WhiteListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 {
     private $ruleSetPath;
     private $ruleSet;
@@ -34,6 +34,8 @@ class RuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
         $this->matcher = new RuleSetMatcher($this->ruleSet, $this->request, $this->server);
         $this->assertTrue($this->matcher->isWhiteListed());
+        $matched = $this->matcher->getMatched();
+        $this->assertEquals('my whitelist', $matched['name']);
     }
 
     public function testNotWhiteListed()
