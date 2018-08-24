@@ -27,10 +27,7 @@ class BlackListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
             'HTTP_X_FORWARDED_PROTO' => ['http']
         ];
 
-        $this->server = [
-            'REQUEST_URI' => '/v1/methods',
-            'QUERY_STRING' => 'one=two&three=4'
-        ];
+        $this->server = [];
 
         $this->matcher = new RuleSetMatcher($this->ruleSet, $this->request, $this->server);
         $this->assertTrue($this->matcher->isBlacklisted());
