@@ -11,6 +11,6 @@ whitelist:
           USER_AGENT: [Mozilla/5.0, python-requests/2.8]
           REFERER: [http://something.com, 'something else']
           COOKIES: [cookie_one, another_cookie]
-      #server: # required
+      server: # required
       #    REQUEST_URI: []
       #    QUERY_STRING: [one=yes&two=no&three=maybe]

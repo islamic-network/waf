@@ -15,7 +15,7 @@ ratelimit:
           REQUEST_URI: [path/one, path/two]
           QUERY_STRING: [one=yes&two=no&three=maybe]
     limit:
-      rate: 1000
+      rate: 10
       time: 3600 #60 = 1 minute, 3600 = 1 hour, 86400 = 1 day
   - name: another limiter # required
     headers: # required
@@ -32,5 +32,5 @@ ratelimit:
             REQUEST_URI: [path/one, path/two]
             QUERY_STRING: [one=yes&two=no&three=maybe]
     limit:
-      rate: 1000
+      rate: 10
       time: 3600 #60 = 1 minute, 3600 = 1 hour, 86400 = 1 day

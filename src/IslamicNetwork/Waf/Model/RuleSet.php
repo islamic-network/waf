@@ -32,12 +32,12 @@ class RuleSet
         }
     }
 
-    public function getAll()
+    public function getAll(): array
     {
         return $this->ruleSets;
     }
 
-    public function getBlacklists()
+    public function getBlacklists(): array
     {
         $this->normaliseHeaderNames($this->ruleSets['blacklist']);
 
@@ -46,7 +46,7 @@ class RuleSet
         return $this->ruleSets['blacklist'];
     }
 
-    public function getWhitelists()
+    public function getWhitelists(): array
     {
         $this->normaliseHeaderNames($this->ruleSets['whitelist']);
 
@@ -55,7 +55,7 @@ class RuleSet
         return $this->ruleSets['whitelist'];
     }
 
-    public function getRatelimits()
+    public function getRatelimits(): array
     {
         $this->normaliseHeaderNames($this->ruleSets['ratelimit']);
 
