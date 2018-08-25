@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use IslamicNetwork\Waf\Model\RuleSet;
 use IslamicNetwork\Waf\Model\RuleSetMatcher;
 
-class BlackListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
+class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 {
     private $ruleSetPath;
     private $ruleSet;
@@ -14,12 +14,12 @@ class BlackListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/blacklist.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../../config/ratelimit.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
 
     }
 
-    public function testBlackListed()
+    public function testRateLimited()
     {
         $this->request = [
             'HTTP_USER_AGENT' => ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36'],
@@ -30,12 +30,12 @@ class BlackListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
         $this->server = [];
 
         $this->matcher = new RuleSetMatcher($this->ruleSet, $this->request, $this->server);
-        $this->assertTrue($this->matcher->isBlacklisted());
+        $this->assertTrue($this->matcher->isRatelimited());
         $matched = $this->matcher->getMatched();
-        $this->assertEquals('your blacklist', $matched['name']);
+        $this->assertEquals('limiter', $matched['name']);
     }
 
-    public function testBlackWhiteListed()
+    public function testIsNotRateLimite()
     {
         $this->request = [
             'HTTP_USER_AGENT' => ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36'],
@@ -50,7 +50,7 @@ class BlackListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
         $this->matcher = new RuleSetMatcher($this->ruleSet, $this->request, $this->server);
 
-        $this->assertFalse($this->matcher->isBlacklisted());
+        $this->assertFalse($this->matcher->isRatelimited());
     }
 
 
