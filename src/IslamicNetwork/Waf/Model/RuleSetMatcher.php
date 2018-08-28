@@ -20,7 +20,7 @@ class RuleSetMatcher
         $this->ruleSet = $ruleSet;
     }
 
-    private function doAllFail(array $value, $toMatch)
+    private function doAllFail(array $value, $toMatch): bool
     {
         $res = [];
         foreach ((array)$value as $vx) {
@@ -31,14 +31,17 @@ class RuleSetMatcher
                 $res[] = true;
             }
         }
+
         if (in_array(true, $res)) {
+            // All do not fail.
             return false;
         }
 
+        // All failed.
         return true;
     }
 
-    public function isAMatch($rule, $type)
+    public function isAMatch($rule, $type): bool
     {
 
         // TODO: This won't work to match CIDR IP entries (it will only work for IP addresses currently). See answer by Samuel Parkinson on https://stackoverflow.com/questions/594112/matching-an-ip-to-a-cidr-mask-in-php-5
@@ -64,7 +67,7 @@ class RuleSetMatcher
         return true;
     }
 
-    private function matchRules($ruleList, $type)
+    private function matchRules($ruleList, $type): bool
     {
         foreach ($ruleList as $rule) {
             // If even one is a match, return true
@@ -83,22 +86,22 @@ class RuleSetMatcher
         return false;
     }
 
-    public function getMatched()
+    public function getMatched(): array
     {
         return $this->matched;
     }
 
-    public function isWhitelisted()
+    public function isWhitelisted(): bool
     {
         return $this->matchRules($this->ruleSet->getWhitelists(), self::WHITELIST);
     }
 
-    public function isBlacklisted()
+    public function isBlacklisted(): bool
     {
         return $this->matchRules($this->ruleSet->getBlacklists(), self::BLACKLIST);
     }
 
-    public function isRatelimited()
+    public function isRatelimited(): bool
     {
         return $this->matchRules($this->ruleSet->getRatelimits(), self::RATELIMIT);
     }

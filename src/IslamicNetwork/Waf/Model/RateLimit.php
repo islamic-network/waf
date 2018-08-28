@@ -16,7 +16,7 @@ class RateLimit
         $this->load();
     }
 
-    public function load()
+    private function load()
     {
         $this->record = $this->memcached->get($this->name);
     }
@@ -42,7 +42,7 @@ class RateLimit
         return true;
     }
 
-    public function allowed()
+    private function allowed(): bool
     {
         $timeLimit = $this->record['start'] + $this->time;
 
@@ -53,7 +53,7 @@ class RateLimit
         return false;
     }
 
-    public function expired()
+    private function expired(): bool
     {
         $timeLimit = $this->record['start'] + $this->time;
 
@@ -64,20 +64,20 @@ class RateLimit
         return false;
     }
 
-    public function initialize()
+    private function initialize()
     {
-        $this->record = ['start' => time(), 'hits' => 0];
+        $this->record = ['start' => time(), 'hits' => 1];
 
         return $this->update();
 
     }
 
-    public function exists()
+    private function exists(): bool
     {
         return $this->memcached->check($this->name);
     }
 
-    public function update()
+    private function update(): bool
     {
         $this->record['hits'] += 1;
 
