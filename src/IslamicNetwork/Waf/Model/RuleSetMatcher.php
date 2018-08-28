@@ -2,6 +2,8 @@
 
 namespace IslamicNetwork\Waf\Model;
 
+use IslamicNetwork\Waf\Helper\IpHelper;
+
 
 class RuleSetMatcher
 {
@@ -20,15 +22,21 @@ class RuleSetMatcher
         $this->ruleSet = $ruleSet;
     }
 
-    private function doAllFail(array $value, $toMatch): bool
+    private function doAllFail(array $value, $toMatch, $headerName): bool
     {
         $res = [];
         foreach ((array)$value as $vx) {
-            // Even if one of these CSV values is matched, this particular key is acceptable
-            if (strpos($toMatch, $vx) === false) {
-                $res[] = false;
-            } else {
-                $res[] = true;
+            if (in_array($headerName, IpHelper::getIpHeaders())) {
+                // Cache this - it's quite expensive, I think.
+                $vx = IpHelper::cidrToIps($vx);
+            }
+            foreach ((array) $vx as $vy) {
+                // Even if one of these CSV values is matched, this particular key is acceptable
+                if (strpos($toMatch, $vy) === false) {
+                    $res[] = false;
+                } else {
+                    $res[] = true;
+                }
             }
         }
 
@@ -49,7 +57,7 @@ class RuleSetMatcher
             foreach ((array)$rule['headers']['request'] as $key => $value) {
                 if (isset($this->request[$key])) {
                     // Even if one key entirely fails, return false
-                    if ($this->doAllFail($value, $this->request[$key][0])) {
+                    if ($this->doAllFail($value, $this->request[$key][0], $key)) {
                         return false;
                     }
                 }

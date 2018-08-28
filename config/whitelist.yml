@@ -3,7 +3,7 @@ whitelist:
   - name: my whitelist # required
     headers: # required
       request: # required HTTP_ appended
-          X_FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+          X_FORWARDED_FOR: [123.456.78.9/27, 78.99.90.3]
           FORWARDED: [123.456.78.9, 78.99.90.3]
           X_FORWARDED: [123.456.78.9, 78.99.90.3]
           X_CLUSTER_CLIENT_IP: [123.456.78.9, 78.99.90.3]
