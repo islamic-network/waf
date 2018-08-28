@@ -51,10 +51,12 @@ class RuleSetMatcher
 
     public function isAMatch($rule, $type): bool
     {
+        $matchedKeys = 0;
             foreach ((array)$rule['headers']['request'] as $key => $value) {
                 if (isset($this->request[$key])) {
+                    $matchedKeys++;
 
-                    // Even if one key entirely fails, return false
+                    // Even if one key does not match we assume the rule does not match. Return false.
                     if ($this->doAllFail($value, $this->request[$key][0], $key)) {
                         return false;
                     }
@@ -63,14 +65,19 @@ class RuleSetMatcher
 
             foreach ((array)$rule['headers']['server'] as $key => $value) {
                 if (isset($this->server[$key])) {
-                    // Even if one key entirely fails, return false
+                    $matchedKeys++;
+                    // Even if one key does not match we assume the rule does not match. Return false.
                     if ($this->doAllFail($value, $this->server[$key][0])) {
                         return false;
                     }
                 }
             }
 
-        return true;
+        if ($matchedKeys > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     private function matchRules($ruleList, $type): bool
