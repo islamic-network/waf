@@ -7,7 +7,7 @@ use IslamicNetwork\Memcached\Cacher;
 
 class RateLimit
 {
-    public function __construct(Cacher $memcached, $name, $limit, $time)
+    public function __construct($memcached, $name, $limit, $time)
     {
         $this->memcached = $memcached;
         $this->name = 'WAF_RL_' . str_replace(' ', '_', $name);
