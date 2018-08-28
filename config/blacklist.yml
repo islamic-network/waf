@@ -3,7 +3,7 @@ blacklist:
   - name: my blacklist # required
     headers: # required
       request: # required HTTP_ appended
-        X_FORWARDED_FOR: [123.456.78.9, 77.99.90.3/27]
+        X_FORWARDED_FOR: ["123.456.78.9", "77.99.90.3/27"]
         USER_AGENT: [Mozilla/5.0, python-requests/2.8]
       server: # required
       #    REQUEST_URI: []
