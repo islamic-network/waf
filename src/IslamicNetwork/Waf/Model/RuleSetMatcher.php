@@ -51,11 +51,9 @@ class RuleSetMatcher
 
     public function isAMatch($rule, $type): bool
     {
-
-        // TODO: This won't work to match CIDR IP entries (it will only work for IP addresses currently). See answer by Samuel Parkinson on https://stackoverflow.com/questions/594112/matching-an-ip-to-a-cidr-mask-in-php-5
-        // to see how to deal with this issue.
             foreach ((array)$rule['headers']['request'] as $key => $value) {
                 if (isset($this->request[$key])) {
+
                     // Even if one key entirely fails, return false
                     if ($this->doAllFail($value, $this->request[$key][0], $key)) {
                         return false;

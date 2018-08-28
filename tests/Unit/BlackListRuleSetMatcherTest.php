@@ -23,7 +23,7 @@ class BlackListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
     {
         $this->request = [
             'HTTP_USER_AGENT' => ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36'],
-            'HTTP_X_FORWARDED_FOR' => ['78.99.90.3, 128.098.765.478, 190.678.545.676'],
+            'HTTP_X_FORWARDED_FOR' => ['78.99.90.7, 123.456.78.99, 190.678.545.676'],
             'HTTP_X_FORWARDED_PROTO' => ['http']
         ];
 
@@ -32,7 +32,7 @@ class BlackListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
         $this->matcher = new RuleSetMatcher($this->ruleSet, $this->request, $this->server);
         $this->assertTrue($this->matcher->isBlacklisted());
         $matched = $this->matcher->getMatched();
-        $this->assertEquals('your blacklist', $matched['name']);
+        $this->assertEquals('my blacklist', $matched['name']);
     }
 
     public function testisNotBlackListed()
