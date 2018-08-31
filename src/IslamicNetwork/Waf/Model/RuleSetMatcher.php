@@ -55,9 +55,9 @@ class RuleSetMatcher
             foreach ((array)$rule['headers']['request'] as $key => $value) {
                 if (isset($this->request[$key])) {
                     $matchedKeys++;
-
+                    $request = (array) $this->request[$key];
                     // Even if one key does not match we assume the rule does not match. Return false.
-                    if ($this->doAllFail($value, $this->request[$key][0], $key)) {
+                    if ($this->doAllFail($value, $request[0], $key)) {
                         return false;
                     }
                 }
@@ -66,8 +66,9 @@ class RuleSetMatcher
             foreach ((array)$rule['headers']['server'] as $key => $value) {
                 if (isset($this->server[$key])) {
                     $matchedKeys++;
+                    $server = (array) $this->server[$key];
                     // Even if one key does not match we assume the rule does not match. Return false.
-                    if ($this->doAllFail($value, $this->server[$key][0])) {
+                    if ($this->doAllFail($value, $server[0], $key)) {
                         return false;
                     }
                 }

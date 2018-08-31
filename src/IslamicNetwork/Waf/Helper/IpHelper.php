@@ -52,7 +52,8 @@ class IpHelper
             'X_FORWARDED',
             'FORWARDED',
             'X_CLUSTER_CLIENT_IP',
-            'CLIENT_IP'
+            'CLIENT_IP',
+            'REMOTE_ADDR'
         ];
     }
 
