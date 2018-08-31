@@ -73,7 +73,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
         $mc = new Cacher('127.0.0.1', 11211);
         //$rl = new RateLimit($mc,  $matched['name'], $matched['rate'], $matched['time']);
-        $rl = new RateLimit($mc,  'test'.time(), 10, 3600);
+        $rl = new RateLimit($mc,  'test'.time(), 10, 10);
 
         // Should we limit this yet?
         for($i=1; $i<=10; $i++) {
@@ -81,6 +81,10 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
         }
 
         $this->assertTrue($rl->isLimited());
+
+        sleep(11);
+
+        $this->assertFalse($rl->isLimited());
 
 
     }
