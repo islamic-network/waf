@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Unit;
 
-use IslamicNetwork\Memcached\Cacher;
+use IslamicNetwork\Waf\Cacher\Memcached;
 use IslamicNetwork\Waf\Model\RateLimit;
 use IslamicNetwork\Waf\Model\RuleSet;
 use IslamicNetwork\Waf\Model\RuleSetMatcher;
@@ -71,7 +71,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
         $matched = $this->matcher->getMatched();
 
-        $mc = new Cacher('127.0.0.1', 11211);
+        $mc = new Memcached('127.0.0.1', 11211);
         //$rl = new RateLimit($mc,  $matched['name'], $matched['rate'], $matched['time']);
         $rl = new RateLimit($mc,  'test'.time(), 10, 10);
 

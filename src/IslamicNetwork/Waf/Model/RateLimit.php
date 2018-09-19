@@ -10,7 +10,7 @@ class RateLimit
     public function __construct($memcached, $name, $limit, $time)
     {
         $this->memcached = $memcached;
-        $this->name = 'WAF_RL_' . str_replace(' ', '_', $name);
+        $this->name = str_replace(' ', '_', $name);
         $this->limit = $limit;
         $this->time = $time;
         $this->load();
