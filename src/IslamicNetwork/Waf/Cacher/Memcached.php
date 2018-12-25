@@ -54,7 +54,7 @@ class Memcached implements Cacher
      * @return \Psr\Cache\CacheItemInterface
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function get($k): \Psr\Cache\CacheItemInterface
+    public function get($k): ?\Psr\Cache\CacheItemInterface
     {
         $item = $this->cache->getItem($k);
 

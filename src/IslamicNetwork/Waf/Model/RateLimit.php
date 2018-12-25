@@ -2,12 +2,11 @@
 
 namespace IslamicNetwork\Waf\Model;
 
-
-use IslamicNetwork\Memcached\Cacher;
+use IslamicNetwork\Waf\Cacher\Memcached;
 
 class RateLimit
 {
-    public function __construct($memcached, $name, $limit, $time)
+    public function __construct(Memcached $memcached, $name, $limit, $time)
     {
         $this->memcached = $memcached;
         $this->name = str_replace(' ', '_', $name);
@@ -64,7 +63,7 @@ class RateLimit
         return false;
     }
 
-    private function initialize()
+    private function initialize(): bool
     {
         $this->record = ['start' => time(), 'hits' => 1];
 
@@ -74,7 +73,7 @@ class RateLimit
 
     private function exists(): bool
     {
-        return $this->memcached->check($this->name);
+        return $this->memcached->exists($this->name);
     }
 
     private function update(): bool
