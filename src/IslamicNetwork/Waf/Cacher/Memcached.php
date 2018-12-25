@@ -1,10 +1,8 @@
 <?php
 namespace IslamicNetwork\Waf\Cacher;
 
-use Cache\Adapter\Common\CacheItem;
 use Cache\Adapter\Memcached\MemcachedCachePool;
 use Cache\Namespaced\NamespacedCachePool;
-use IslamicNetwork\Waf\Cacher\Cacher;
 
 /**
  * Class Memcached
