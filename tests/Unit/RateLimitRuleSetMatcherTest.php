@@ -91,7 +91,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
         $matched = $this->matcher->getMatched();
 
-        $mc = new Memcached('127.0.0.1', 11211);
+        $mc = new Memcached('127.0.0.1', 11211, 'accountX');
         //$rl = new RateLimit($mc,  $matched['name'], $matched['rate'], $matched['time']);
         $rl = new RateLimit($mc,  $matched['name'], 10, 10);
 

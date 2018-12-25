@@ -5,7 +5,11 @@ namespace IslamicNetwork\Waf\Helper;
 
 class IpHelper
 {
-    public static function cidrToRange($cidr): array
+    /**
+     * @param string $cidr
+     * @return array
+     */
+    public static function cidrToRange(string $cidr): array
     {
         $range = array();
         $cidr = explode('/', $cidr);
@@ -15,6 +19,10 @@ class IpHelper
         return $range;
     }
 
+    /**
+     * @param array $range
+     * @return array
+     */
     public static function rangeToAddresses(array $range): array
     {
         $a = [];
@@ -28,7 +36,11 @@ class IpHelper
 
     }
 
-    public static function cidrToIps($cidr): array
+    /**
+     * @param string $cidr
+     * @return array|string
+     */
+    public static function cidrToIps(string $cidr)
     {
         if (self::isCidr($cidr)) {
             return self::rangeToAddresses(self::cidrToRange($cidr));
@@ -37,7 +49,11 @@ class IpHelper
         return $cidr;
     }
 
-    public static function isCidr($ip): bool
+    /**
+     * @param string $ip
+     * @return bool
+     */
+    public static function isCidr(string $ip): bool
     {
         $x = explode("/", $ip);
 
@@ -45,6 +61,9 @@ class IpHelper
 
     }
 
+    /**
+     * @return array
+     */
     public static function getIpHeaders(): array
     {
         return [

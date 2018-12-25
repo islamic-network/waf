@@ -23,12 +23,12 @@ class Memcached implements Cacher
      * @param $host
      * @param $port
      */
-    public function __construct($host, $port)
+    public function __construct($host, $port, $nameSpaceExtension = '')
     {
         $memCached = new \Memcached();
         try {
             $memCached->addServer($host, $port);
-            $this->cache = new NamespacedCachePool(new MemcachedCachePool($memCached), self::NAMESPACE);
+            $this->cache = new NamespacedCachePool(new MemcachedCachePool($memCached), self::NAMESPACE . $nameSpaceExtension);
         } catch (Exception $e) {
             throw new Exception('Unable to Connect to Memcached', $e->getMessage());
         }
