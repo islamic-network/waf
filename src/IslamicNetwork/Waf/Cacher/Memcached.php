@@ -22,6 +22,7 @@ class Memcached implements Cacher
      * Memcached constructor.
      * @param $host
      * @param $port
+     * @param string $nameSpaceExtension
      */
     public function __construct($host, $port, $nameSpaceExtension = '')
     {
