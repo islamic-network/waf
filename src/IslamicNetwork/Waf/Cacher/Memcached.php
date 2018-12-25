@@ -6,7 +6,7 @@ use Cache\Namespaced\NamespacedCachePool;
 
 /**
  * Class Memcached
- * @package Helper\Cacher
+ * @package IslamicNetwork\Waf\Cacher
  */
 class Memcached implements Cacher
 {

@@ -2,7 +2,10 @@
 
 namespace IslamicNetwork\Waf\Cacher;
 
-
+/**
+ * Interface Cacher
+ * @package IslamicNetwork\Waf\Cacher
+ */
 interface Cacher
 {
     const NAMESPACE = 'WAF';
