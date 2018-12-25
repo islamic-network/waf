@@ -28,7 +28,7 @@ class IpHelper
 
     }
 
-    public static function cidrToIps($cidr)
+    public static function cidrToIps($cidr): array
     {
         if (self::isCidr($cidr)) {
             return self::rangeToAddresses(self::cidrToRange($cidr));
@@ -45,7 +45,7 @@ class IpHelper
 
     }
 
-    public static function getIpHeaders()
+    public static function getIpHeaders(): array
     {
         return [
             'HTTP_X_FORWARDED_FOR',

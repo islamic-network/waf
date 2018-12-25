@@ -1,5 +1,17 @@
 # Note that values separated with a comma are always OR and each of the global keys are always AND
 ratelimit:
+
+#### DEFAULT SETTING, TRIGGERS DEFAULT RATE LIMITING ###
+  - name: default
+    headers:
+      request:
+        X_FORWARDED_FOR: []
+      server:
+        X_SERVER: []
+    limit:
+      rate: 60 # hits per
+      time: 60 # seconds
+###########################################################
   - name: limiter # required
     headers: # required
       request: # required HTTP_ appended

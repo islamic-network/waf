@@ -6,6 +6,7 @@ use IslamicNetwork\Waf\Cacher\Memcached;
 
 class RateLimit
 {
+
     public function __construct(Memcached $memcached, $name, $limit, $time)
     {
         $this->memcached = $memcached;

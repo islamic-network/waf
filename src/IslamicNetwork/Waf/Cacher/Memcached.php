@@ -49,12 +49,11 @@ class Memcached implements Cacher
     }
 
     /**
-     * Gets the value of a key
-     * @param string $k Key
-     * @return \Psr\Cache\CacheItemInterface
+     * @param $k
+     * @return mixed
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function get($k): ?\Psr\Cache\CacheItemInterface
+    public function get($k)
     {
         $item = $this->cache->getItem($k);
 

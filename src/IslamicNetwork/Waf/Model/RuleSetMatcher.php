@@ -3,6 +3,7 @@
 namespace IslamicNetwork\Waf\Model;
 
 use IslamicNetwork\Waf\Helper\IpHelper;
+use IslamicNetwork\Waf\Helper\RateLimitHelper;
 
 
 class RuleSetMatcher
@@ -15,7 +16,7 @@ class RuleSetMatcher
     const BLACKLIST = 'blacklist';
     const RATELIMIT = 'ratelimit';
 
-    public function __construct(RuleSet $ruleSet, $request, $server)
+    public function __construct(RuleSet $ruleSet, array $request, array $server)
     {
         $this->request = $request;
         $this->server = $server;
@@ -98,6 +99,21 @@ class RuleSetMatcher
         }
 
         return false;
+    }
+
+    public function getDefaultRateLimitMatch(): array
+    {
+        // get default rule
+        $rule = RateLimitHelper::getDefaultRule($this->ruleSet->getRatelimits());
+        $hash = RateLimitHelper::getDefaultRateLimitHash($rule, $this->request, $this->server);
+
+        return [
+            'name' => $hash,
+            'type' => self::RATELIMIT,
+            'rate' => $rule['limit']['rate'],
+            'time' => $rule['limit']['time']
+        ];
+
     }
 
     public function getMatched(): array

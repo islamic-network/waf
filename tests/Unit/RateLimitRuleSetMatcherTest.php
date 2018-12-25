@@ -55,6 +55,26 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->matcher->isRatelimited());
     }
 
+    public function testDefault()
+    {
+        $this->request = [
+            'HTTP_X_FORWARDED_FOR' => ['78.99.90.3, 128.098.765.478, 190.678.545.676'],
+        ];
+        $this->server = [];
+        $this->matcher = new RuleSetMatcher($this->ruleSet, $this->request, $this->server);
+        $matched = $this->matcher->getDefaultRateLimitMatch();
+
+        $mc = new Memcached('127.0.0.1', 11211);
+        $rl = new RateLimit($mc, $matched['name'], $matched['rate'], $matched['time']);
+
+        // Should we limit this yet?
+        for($i=1; $i<=60; $i++) {
+            $this->assertFalse($rl->isLimited());
+        }
+
+        $this->assertTrue($rl->isLimited());
+    }
+
     public function testRateLimiting()
     {
         $this->request = [
