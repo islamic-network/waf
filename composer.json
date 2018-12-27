@@ -27,7 +27,6 @@
     "require": {
         "symfony/yaml": "^4.1",
         "psr/http-message": "^1.0",
-        "cache/cache": "^1.0",
-        "vesica/proxy": "^3.0"
+        "cache/cache": "^1.0"
     }
 }
