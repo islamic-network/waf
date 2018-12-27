@@ -12,10 +12,12 @@ class Handler
     public function __invoke($request, $response, $exception = null) {
 
         if ($exception instanceof BlackListException) {
+            $response = $response->withHeader('X-WAF-STATUS', 'BLACKLISTED');
             return $response->withJson(self::blacklist(), 403);
         }
 
         if ($exception instanceof RateLimitException) {
+            $response = $response->withHeader('X-WAF-STATUS', 'RATELIMITED');
             return $response->withJson(self::ratelimit(), 429);
         }
 
