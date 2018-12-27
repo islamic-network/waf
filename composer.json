@@ -2,7 +2,6 @@
     "name": "islamic-network/waf",
     "type": "library",
     "description": "WAF built for the Islamic Network",
-    "version": "1.0",
     "authors": [
         {
             "name": "Meezaan-ud-Din Abdu Dhil-Jalali Wal-Ikram",
