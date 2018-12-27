@@ -7,7 +7,7 @@ use IslamicNetwork\Waf\Exceptions\RateLimitException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class AlAdhanHandler
+class Handler
 {
     public function __invoke($request, $response, $exception = null) {
 
