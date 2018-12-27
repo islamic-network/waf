@@ -2,10 +2,17 @@
     "name": "islamic-network/waf",
     "type": "library",
     "description": "WAF built for the Islamic Network",
+    "version": "1.0",
     "authors": [
         {
             "name": "Meezaan-ud-Din Abdu Dhil-Jalali Wal-Ikram",
             "email": "website@meezaan.net"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/vesica/php-proxy.git"
         }
     ],
     "autoload": {
@@ -21,6 +28,7 @@
     "require": {
         "symfony/yaml": "^4.1",
         "psr/http-message": "^1.0",
-        "cache/cache": "^1.0"
+        "cache/cache": "^1.0",
+        "vesica/proxy": "^3.0"
     }
 }
