@@ -43,6 +43,7 @@ class Memcached implements Cacher
     {
         $item = $this->cache->getItem($k);
         $item->set($v);
+        $item->expiresAfter(86400); //1 day
 
         return $this->cache->save($item);
     }
