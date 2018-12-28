@@ -20,6 +20,12 @@ class MemcachedTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('happiness', $mc->get('one'));
         $this->assertNotEquals('yes', $mc->get('one'));
 
+        $mc2 = new Memcached('127.0.0.1', 11211, 'test');
+        $this->assertFalse($mc2->exists('one'));
+        $mc2->set('one', 'NO');
+        $this->assertEquals('NO', $mc2->get('one'));
+        $this->assertEquals('happiness', $mc->get('one'));
+
     }
 
 
