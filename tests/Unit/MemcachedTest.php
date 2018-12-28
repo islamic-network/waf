@@ -1,10 +1,9 @@
 <?php
 namespace Tests\Unit;
 
-use Cache\Adapter\Memcached\MemcachedCachePool;
 use IslamicNetwork\Waf\Cacher\Memcached;
 
-class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
+class MemcachedTest extends \PHPUnit\Framework\TestCase
 {
 
 
