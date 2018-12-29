@@ -53,27 +53,31 @@ class RuleSetMatcher
     public function isAMatch($rule, $type): bool
     {
         $matchedKeys = 0;
+        if (isset($rule['headers']['request'])) {
             foreach ((array)$rule['headers']['request'] as $key => $value) {
                 if (isset($this->request[$key])) {
                     $matchedKeys++;
-                    $request = (array) $this->request[$key];
+                    $request = (array)$this->request[$key];
                     // Even if one key does not match we assume the rule does not match. Return false.
                     if ($this->doAllFail($value, $request[0], $key)) {
                         return false;
                     }
                 }
             }
+        }
 
+        if (isset($rule['headers']['server'])) {
             foreach ((array)$rule['headers']['server'] as $key => $value) {
                 if (isset($this->server[$key])) {
                     $matchedKeys++;
-                    $server = (array) $this->server[$key];
+                    $server = (array)$this->server[$key];
                     // Even if one key does not match we assume the rule does not match. Return false.
                     if ($this->doAllFail($value, $server[0], $key)) {
                         return false;
                     }
                 }
             }
+        }
 
         if ($matchedKeys > 0) {
             return true;
