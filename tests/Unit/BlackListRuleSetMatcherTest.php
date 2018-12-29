@@ -19,6 +19,12 @@ class BlackListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
     }
 
+    public function testString()
+    {
+        $this->assertTrue(substr(strtoupper('http_x_for'), 0, 5) === 'HTTP_');
+        $this->assertTrue(substr(strtoupper('HTTP_x_2'), 0, 5) === 'HTTP_');
+        $this->assertFalse(substr(strtoupper('X_2'), 0, 5) === 'HTTP_');
+    }
     public function testBlackListed()
     {
         $this->request = [

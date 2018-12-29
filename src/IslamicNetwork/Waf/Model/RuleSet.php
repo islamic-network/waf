@@ -71,7 +71,11 @@ class RuleSet
             if (isset($rs['headers']['request'])) {
                 foreach ($rs['headers']['request'] as $key => $value) {
                     unset($ruleset[$rsKey]['headers']['request'][$key]);
-                    $ruleset[$rsKey]['headers']['request']['HTTP_' . str_replace('-', '_', strtoupper($key))] = $value;
+                    if (substr(strtoupper($key), 0, 5) === 'HTTP_') {
+                        $ruleset[$rsKey]['headers']['request'][str_replace('-', '_', strtoupper($key))] = $value;
+                    } else {
+                        $ruleset[$rsKey]['headers']['request']['HTTP_' . str_replace('-', '_', strtoupper($key))] = $value;
+                    }
                 }
             }
 
