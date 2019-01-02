@@ -22,8 +22,12 @@ class RateLimitHelper
     public static function getDefaultRateLimitHash(array $rule, array $request, array $server): ?string
     {
         // TODO: Check $rule
-        $ruleKeysRequest = array_keys($rule['headers']['request']);
-        $ruleKeysServer =  array_keys($rule['headers']['server']);
+        if (isset($rule['headers']['request'])) {
+            $ruleKeysRequest = array_keys($rule['headers']['request']);
+        }
+        if (isset($rule['headers']['server'])) {
+            $ruleKeysServer = array_keys($rule['headers']['server']);
+        }
         $requestKeys = array_keys($request);
         $serverKeys = array_keys($server);
         // Take the first incoming key and generate a hash of its value
