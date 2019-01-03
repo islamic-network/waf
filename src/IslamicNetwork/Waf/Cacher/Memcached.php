@@ -39,11 +39,11 @@ class Memcached implements Cacher
      * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function set($k, $v): bool
+    public function set($k, $v, $ttl = 86400): bool
     {
         $item = $this->cache->getItem($k);
         $item->set($v);
-        $item->expiresAfter(86400); //1 day
+        $item->expiresAfter((int) $ttl); //1 day
 
         return $this->cache->save($item);
     }
