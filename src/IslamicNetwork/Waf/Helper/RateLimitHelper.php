@@ -46,7 +46,7 @@ class RateLimitHelper
         }
 
         // hash the entire server request
-        return self::hash($server);
+        return self::hash($request);
     }
 
     private static function hash($value): string
