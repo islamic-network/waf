@@ -17,7 +17,6 @@
     "autoload": {
         "psr-4": {
             "IslamicNetwork\\Waf\\": "src/IslamicNetwork/Waf/",
-            "IslamicNetwork\\Memcached\\": "src/IslamicNetwork/Memcached"
         }
     },
     "require-dev": {
