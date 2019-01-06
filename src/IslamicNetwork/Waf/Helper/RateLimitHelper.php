@@ -23,6 +23,9 @@ class RateLimitHelper
     {
         $ruleKeysRequest = [];
         $ruleKeysServer = [];
+        $matchedKeys = [];
+        $totalKeysToMatch = 0;
+
         // TODO: Check $rule
         if (isset($rule['headers']['request'])) {
             $ruleKeysRequest = array_keys($rule['headers']['request']);
@@ -30,22 +33,30 @@ class RateLimitHelper
         if (isset($rule['headers']['server'])) {
             $ruleKeysServer = array_keys($rule['headers']['server']);
         }
+        // Total matched keys.
+        $totalKeysToMatch = count($ruleKeysServer) + count($ruleKeysRequest);
+
         $requestKeys = array_keys($request);
         $serverKeys = array_keys($server);
+
         // Take the first incoming key and generate a hash of its value
         foreach($ruleKeysRequest as $keyR) {
             if (in_array($keyR, $requestKeys)) {
-                return self::hash($request[$keyR]);
+                $matchedKeys[] = $request[$keyR];
             }
         }
 
         foreach($ruleKeysServer as $keyS) {
             if (in_array($keyS, $serverKeys)) {
-                return self::hash($server[$keyS]);
+                $matchedKeys[] = $server[$keyS];
             }
         }
+        // If matched keys are the same as the total to match, use this to rate limit. Otherwise the whole request
+        if (count($matchedKeys) === $totalKeysToMatch) {
+            return self::hash($matchedKeys);
+        }
 
-        // hash the entire server request
+        // otherwise hash the entire server request
         return self::hash($request);
     }
 
