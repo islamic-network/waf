@@ -51,6 +51,7 @@ class RateLimitHelper
                 $matchedKeys[] = $server[$keyS];
             }
         }
+
         // If matched keys are the same as the total to match, use this to rate limit. Otherwise the whole request
         if (count($matchedKeys) === $totalKeysToMatch) {
             return self::hash($matchedKeys);

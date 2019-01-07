@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "IslamicNetwork\\Waf\\": "src/IslamicNetwork/Waf/",
+            "IslamicNetwork\\Waf\\": "src/IslamicNetwork/Waf/"
         }
     },
     "require-dev": {
