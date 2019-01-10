@@ -1,4 +1,34 @@
-# A Work in Progress - Use at your own risk
+# A WAF for Developers
+
+This is a WAF written in PHP. 
+
+You can either use it with your app or deploy it with a proxy.
+
+
+## Current Status
+This project is still in Alpha mode. Some of the things to do are listed under [issues](https://github.com/islamic-network/waf/issues).
+
+## Why was it written?
+
+We needed a WAF for the AlAdhan API.
+
+We tried to use Incapsula and it wasn't something we could afford for the free services offered by [Islamic Network](https://islamic.network).
+
+CloudFlare was good, but it seemed to have been blocked by ISPs in Russia and China (and it doesn't really allow us to write any custom rules for the WAF).
+
+If you've ever tried to use something like ModSecurity, you'll know it's tedious. 
+
+This WAF allows you to write rules in a yaml file - that's much easier to read and write for most developers.
+
+## Who is this for?
+
+For developers looking to deploy a WAF within their apps or outside their API Gateway.
+
+Eventually, we will provide OWASP ruleset files that you can simply include in your installation.
+
+We will also, God willing, offer a hosted service. If you'd like to trial this, please email support@islamic.network.
+
+## Why YAML and PHP?
 
 # usage
 ```php
