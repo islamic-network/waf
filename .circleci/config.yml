@@ -10,12 +10,24 @@ jobs:
     - image: vesica/php72
     # Memcached container
     - image: memcached:1.5
-    working_directory: /var/www
+    working_directory: ~/repo
 
-    # Setup Service and Create Database
     steps:
-    - run: composer install
+    - checkout
 
-    # Store Artifacts
-    #- store_artifacts:
-    #    path: /app/build
+    # Download and cache dependencies
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "composer.json" }}
+        # fallback to using the latest cache if no exact match is found
+        - v1-dependencies-
+
+    - run: composer install -n --prefer-dist
+
+    - save_cache:
+        paths:
+        - ./vendor
+        key: v1-dependencies-{{ checksum "composer.json" }}
+
+    # run tests!
+    - run: phpunit
