@@ -8,12 +8,6 @@
             "email": "meezaan@vesica.co.uk"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/vesica/php-proxy.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "IslamicNetwork\\Waf\\": "src/IslamicNetwork/Waf/"
