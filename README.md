@@ -1,3 +1,5 @@
+## بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+
 [![CircleCI](https://circleci.com/gh/islamic-network/waf.svg?style=svg)](https://circleci.com/gh/islamic-network/waf) 
 
 # A WAF for Developers
