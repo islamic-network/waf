@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -31,3 +31,15 @@ jobs:
 
     # run tests!
     - run: vendor/bin/phpunit tests/
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /.*/
