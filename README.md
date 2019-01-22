@@ -30,16 +30,32 @@ For developers looking to deploy a WAF within their apps or outside their API Ga
 
 Eventually, we will provide OWASP ruleset files that you can simply include in your installation.
 
-We will also, God willing, offer a hosted service. If you'd like to trial this, please email support@islamic.network.
+We will also, God willing, offer a hosted service. 
+
+**This is currently being trailled.** It basically allows you to manage your ruleset file in a git repo and automatically deploys to your hosted WAF. 
+
+If you'd like to trial this, please email support@islamic.network.
 
 ## Why YAML and PHP?
 
-# usage
+Because they're easy to use, easy to maintain and easy to manage.
+
+# Installation and Usage
+To install, run ```composer require islamic-network/waf```.
+
+You can then use this in your app using the following:
+
 ```php
 <?php
 
-$ruleset = new RuleSet($file);
-$matcher = new \IslamicNetwork\Waf\Model\RuleSetMatcher($ruleset, $_REQUEST, $_SERVER);
+use \IslamicNetwork\Waf\Model\RuleSet;
+use \IslamicNetwork\Waf\Model\RuleSetMatcher;
+use Slim\Http\Request; // Or any other PSR7 Compliant http request object
+
+
+$ruleset = new RuleSet($filePath);
+$matcher = new \IslamicNetwork\Waf\Model\RuleSetMatcher($ruleset, $request->getHeaders(), $_SERVER);
+
 if ($matcher->isWhitelisted()) {
     // Do nothing. Maybe append headers.
 }
@@ -56,43 +72,3 @@ if ($matcher->isRatelimited()) {
 }
 
 ```
-
-
-# Rules
-
-blacklist Response code 403
-whitelist
-ratelimit (per hour, per day, per minute, per second) Response code 429
-patching
-redirect
-rewrite
-
-
-## Rules Paramters
-ips
-countries
-user_agents
-http_referers
-http_cookies
-url_paths
-headers
-query_strings
-request_body
-
-## Patching Parameters:
-headers (inject, modify, delete)
-query_strings (inject, modify, delete)
-reqest_body (inject, modify, delete)
-
-
-
-
-# Order of execution:
-
-Rules:
-whitelist
-blacklist
-ratelimit
-patching
-redirect
-rewrite
