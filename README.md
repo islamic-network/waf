@@ -1,6 +1,8 @@
 ## بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
 
-[![CircleCI](https://circleci.com/gh/islamic-network/waf.svg?style=svg)](https://circleci.com/gh/islamic-network/waf) 
+[![CircleCI](https://circleci.com/gh/islamic-network/waf.svg?style=shield)](https://circleci.com/gh/islamic-network/waf) 
+[![](https://img.shields.io/github/release/islamic-network/waf.svg)](https://github.com/islamic-network/waf/releases)
+[![](https://img.shields.io/github/license/islamic-network/waf.svg)](https://github.com/islamic-network/waf/blob/master/LICENSE)
 
 # A WAF for Developers
 
