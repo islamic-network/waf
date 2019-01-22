@@ -48,13 +48,13 @@ You can then use this in your app using the following:
 ```php
 <?php
 
-use \IslamicNetwork\Waf\Model\RuleSet;
-use \IslamicNetwork\Waf\Model\RuleSetMatcher;
+use IslamicNetwork\Waf\Model\RuleSet;
+use IslamicNetwork\Waf\Model\RuleSetMatcher;
 use Slim\Http\Request; // Or any other PSR7 Compliant http request object
 
 
 $ruleset = new RuleSet($filePath);
-$matcher = new \IslamicNetwork\Waf\Model\RuleSetMatcher($ruleset, $request->getHeaders(), $_SERVER);
+$matcher = new RuleSetMatcher($ruleset, $request->getHeaders(), $_SERVER);
 
 if ($matcher->isWhitelisted()) {
     // Do nothing. Maybe append headers.
