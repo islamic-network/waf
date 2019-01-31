@@ -12,7 +12,9 @@ You can either use it with your app or deploy it with a proxy.
 
 
 ## Current Status
-This project is still in Alpha mode. Some of the things to do are listed under [issues](https://github.com/islamic-network/waf/issues).
+This project is stable but has a basic feature set. It also gets updates, often, but a breaking change will go in a new major version.
+
+Some of the things to do are listed under [issues](https://github.com/islamic-network/waf/issues).
 
 ## Why was it written?
 
@@ -32,9 +34,9 @@ For developers looking to deploy a WAF within their apps or outside their API Ga
 
 Eventually, we will provide OWASP ruleset files that you can simply include in your installation.
 
-We will also, God willing, offer a hosted service. 
+We will also, God willing, offer a hosted service and make the production deployment mechanism open source in due course. 
 
-**This is currently being trailled.** It basically allows you to manage your ruleset file in a git repo and automatically deploys to your hosted WAF. 
+**The hosted service is currently being trailled.** It basically allows you to manage your ruleset file in a git repo and automatically deploys to your hosted WAF. 
 
 If you'd like to trial this, please email support@islamic.network.
 
@@ -70,7 +72,122 @@ if ($matcher->isRatelimited()) {
     if ($rl->isLimited()) {
         // Throw http 429
     }
-    
 }
+```
+
+## Defining Rulesets, Rules and Matchers
+The WAF reads a Ruleset YAML file and decides if any of the above code will return true or not.
+
+Let's have a look at the structure of this file.
+
+```yaml
+# Note that values separated with a comma are always OR and each of the global keys are always AND
+blacklist:
+  - name: my blacklist # required
+    headers: # required
+      request: # required.HTTP_ appended
+        X-FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+        FORWARDED: [123.456.78.9, 78.99.90.3]
+        USER-aGENT: [Mozilla/5.0, python-requests/2.8]
+      server: # required
+        rEQUEST_URI: [path/one, path/two]
+        QUERY_STRING: [one=yes&two=no&three=maybe, another=0&someother=1]
+
+whitelist:
+  - name: my whitelist # required
+    headers: # required
+      request: # required HTTP_ appended
+          X_FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+          FORWARDED: [123.456.78.9, 78.99.90.3]
+          X_FORWARDED: [123.456.78.9, 78.99.90.3]
+          X_CLUSTER_CLIENT_IP: [123.456.78.9, 78.99.90.3]
+          CLIENT_IP: [123.456.78.9, 78.99.90.3]
+          USER_AGENT: [Mozilla/5.0, python-requests/2.8]
+          REFERER: [http://something.com, 'something else']
+          COOKIES: [cookie_one, another_cookie]
+      server: # required
+          REQUEST_URI: [path/one, path/two]
+          QUERY_STRING: [one=yes&two=no&three=maybe]
+ratelimit:
+  - name: limiter # required
+    headers: # required
+      request: # required HTTP_ appended
+          X_FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+          FORWARDED: [123.456.78.9, 78.99.90.3]
+          X_FORWARDED: [123.456.78.9, 78.99.90.3]
+          X_CLUSTER_CLIENT_IP: [123.456.78.9, 78.99.90.3]
+          CLIENT_IP: [123.456.78.9, 78.99.90.3]
+          USER_AGENT: [Mozilla/5.0, python-requests/2.8]
+          REFERER: [http://something.com, 'something else']
+          COOKIES: [cookie_one, another_cookie]
+      server: # required
+          REQUEST_URI: [path/one, path/two]
+          QUERY_STRING: [one=yes&two=no&three=maybe]
+    limit:
+      rate: 1000
+      time: 3600 #60 = 1 minute, 3600 = 1 hour, 86400 = 1 day
+  - name: another limiter # required
+    headers: # required
+        request: # required HTTP_ appended
+            X_FORWARDED_FOR: [123.456.78.9, 78.99.90.3]
+            FORWARDED: [123.456.78.9, 78.99.90.3]
+            X_FORWARDED: [123.456.78.9, 78.99.90.3]
+            X_CLUSTER_CLIENT_IP: [123.456.78.9, 78.99.90.3]
+            CLIENT_IP: [123.456.78.9, 78.99.90.3]
+            USER_AGENT: [Mozilla/5.0, python-requests/2.8]
+            REFERER: [http://something.com, 'something else']
+            COOKIES: [cookie_one, another_cookie]
+        server: # required
+            REQUEST_URI: [path/one, path/two]
+            QUERY_STRING: [one=yes&two=no&three=maybe]
+    limit:
+      rate: 1000
+      time: 3600 #60 = 1 minute, 3600 = 1 hour, 86400 = 1 day
+````
+
+## Ruleset
+
+Currently, 3 Rulesets are supported. In the above file, these are:
+1. Whitelist
+2. Blacklist
+3. Ratelimit
+
+### Rule
+
+An instance of a ruleset, is a rule. So in the above Yaml, there is 1 whitelist rule, 1 blacklist rule, and there are 2 ratelimit rules.
+
+A rule comprises a name, matchers (and submatchers) and a message (the message is coming soon). See https://github.com/islamic-network/waf/issues/8.
+
+#### Matcher
+
+Currently, only the 'headers' matcher is supported, and in that you can specify request and server headers to match. Header names can have - or _ and are case agnostic.
+
+A 'body' matcher is in progress. See https://github.com/islamic-network/waf/issues/6.
+
+#### How Matchers Work
+
+Each matcher or submatcher can be an array.
+
+So the blacklist rule 'my blacklist' has a headers matcher which basically reads like this:
+
 
 ```
+// The below is pseudo code
+
+if the request header
+    x-forwarded-for contains 123.456.78.9 OR 78.99.90.3
+    AND
+    forwarded contains 123.456.78.9 OR 78.99.90
+    AND
+    user-agent contains Mozilla/5.0 OR python-requests/2.8
+AND the server header contains
+    request-uri contains path/one OR path/two
+    AND
+    query-string contains one=yes&two=no&three=maybe OR another=0&someother=1
+THEN
+    this rule is matched (isBlacklisted returns true)
+ELSE
+    this rule is unmatched (isBlacklisted returns false)
+
+```
+
