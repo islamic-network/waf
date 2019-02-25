@@ -48,7 +48,7 @@ $app->add(function (Request $request, Response $response, $next) {
 
     if ($wafRules == null || empty($wafRules)) {
         die('Unable to read WAF rules.');
-        $logger->error($logId . ' Unable to read WAF Rules from memcached or ' . getenv('WAF_YAML_URL'));
+        $logger->error($logId . ' Unable to read WAF Rules from memcached or ' . getenv('WAF_CONFIG_URL'));
     }
     $waf = new RuleSetMatcher($wafRules, $request->getHeaders(), $server);
 
