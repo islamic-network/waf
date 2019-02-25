@@ -45,7 +45,7 @@ If you'd like to trial this, please email support@islamic.network.
 Because they're easy to use, easy to maintain and easy to manage.
 
 # Installation and Usage
-To install, run ```composer require islamic-network/waf```.
+COMING SOON!
 
 You can then use this in your app using the following:
 
