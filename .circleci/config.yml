@@ -178,7 +178,7 @@ workflows:
               ignore: /.*/
       - build-docker-image:
           requires:
-            - push-git-tag
+            - test
           filters:
             branches:
               only: develop
