@@ -96,7 +96,7 @@ jobs:
             echo "ci_build: ${CIRCLE_BUILD_NUM}" >> html/VERSION
             echo "ci_workflow: ${CIRCLE_WORKFLOW_ID}" >> html/VERSION
       - run:
-          name: Build Production Docker image
+          name: Build Dev Docker image
           command: docker build -t $IMAGE_NAME:develop .
       - run:
           name: Archive Dev Docker image
@@ -210,7 +210,7 @@ workflows:
       - publish-docker-develop:
           context: org-global
           requires:
-            - build-docker-image
+            - build-dev-docker-image
           filters:
             branches:
               only: develop
