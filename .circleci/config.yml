@@ -43,12 +43,11 @@ jobs:
             - v1-dependencies-{{ checksum "composer.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: composer install -n --prefer-dist
+      - run: composer install -n --prefer-dist --no-dev
       - save_cache:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
-      - run: vendor/bin/phpunit
   push-git-tag:
     docker:
       - image: cibuilds/github

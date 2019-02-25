@@ -6,7 +6,7 @@ require_once realpath(__DIR__) . '/../vendor/autoload.php';
 /** Settings **/
 $settings = [
     'settings' => [
-        'displayErrorDetails' => false, // set to false in production
+        'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => true, // Allow the web server to send the content-length header
     ],
 ];

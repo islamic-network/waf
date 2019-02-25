@@ -6,9 +6,9 @@
 
 # A WAF for Developers
 
-This is a WAF written in PHP. 
+This is a WAF written in PHP.  To configure and use it, you need to know YAML and understand the various parts of an HTTP request.
 
-You can either use it with your app or deploy it with a proxy.
+It is completely dockerised and to deploy it you will need to run a docker command and specify some environment variables.
 
 
 ## Current Status
@@ -45,9 +45,20 @@ If you'd like to trial this, please email support@islamic.network.
 Because they're easy to use, easy to maintain and easy to manage.
 
 # Installation and Usage
-COMING SOON!
 
-You can then use this in your app using the following:
+This WAF is production ready and can be deployed as a proxy using the provided Dockerfile or docker-compose file.
+
+You can even use the already published docker image at vesica/proxy.waf.network
+
+
+## The underlying library and how it works
+
+You'll need to understand some PHP for this section.
+
+To see how the waf processes your YAML file, see the bootstrap/wafMiddleware.php file.
+
+In a nutshell, this is what it does:
+
 
 ```php
 <?php

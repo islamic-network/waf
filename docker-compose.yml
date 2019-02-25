@@ -4,6 +4,7 @@ services:
   # PHP application Docker container
   #######################################
   proxy:
+    #image: vesica/proxy.waf.network:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,11 +15,11 @@ services:
     environment:
       MEMCACHED_HOST: "proxy-memcached"
       MEMCACHED_PORT: "11211"
-      PROXY_URL: "https://api.aladhan.com"
+      PROXY_URL: "https://website.url"
       WAF_PROXY_NAMESPACE: "MyNameSpace"
-      WAF_CONFIG_URL: "http://vesica.ws/waf.yml"
+      WAF_CONFIG_URL: "http://vesica.ws/waf.yml" # This is just a test file
       WAF_CONFIG_EXPIRY: "300"
-      WAF_KEY: "someKey"
+      WAF_KEY: "CBqTh2mE6g"
       LOG_LEVEL: "DEBUG"
     ports:
       - "80:8080"
