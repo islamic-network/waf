@@ -125,7 +125,7 @@ workflows:
             branches:
               only: master
             tags:
-              only: /.*/
+              ignore: /.*/
       - push-git-tag:
           requires:
             - test
@@ -133,12 +133,16 @@ workflows:
           filters:
             branches:
               only: master
+            tags:
+              ignore: /.*/
       - build-docker-image:
           requires:
             - push-git-tag
           filters:
             branches:
               only: master
+            tags:
+              ignore: /.*/
       - publish-docker-latest:
           context: org-global
           requires:
@@ -146,28 +150,30 @@ workflows:
           filters:
             branches:
               only: master
-#  build-tags:
-#    jobs:
-#      - test:
-#          filters:
-#            tags:
-#              only: /.*/
-#            branches:
-#              ignore: /.*/
-#      - build-docker-image:
-#          requires:
-#            - test
-#          filters:
-#            tags:
-#              only: /.*/
-#            branches:
-#              ignore: /.*/
-#      - publish-docker-tag:
-#          context: org-global
-#          requires:
-#            - build-docker-image
-#          filters:
-#            tags:
-#              only: /.*/
-#            branches:
-#              ignore: /.*/
+            tags:
+              ignore: /.*/
+  build-tags:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+      - build-docker-image:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+      - publish-docker-tag:
+          context: org-global
+          requires:
+            - build-docker-image
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
