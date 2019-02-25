@@ -8,6 +8,7 @@ use Vesica\Waf\Model\RuleSetMatcher;
 use Vesica\Waf\Model\RateLimit;
 use Vesica\Waf\Exceptions\BlackListException;
 use Vesica\Waf\Exceptions\RateLimitException;
+use Monolog\Logger;
 
 /** Invoke Middleware for WAF Checks */
 $app->add(function (Request $request, Response $response, $next) {
@@ -15,10 +16,10 @@ $app->add(function (Request $request, Response $response, $next) {
     // Add headers to request
     $request = $request->withAddedHeader('X-WAF-KEY', getenv('WAF_KEY'));
 
-    $logger = new \Monolog\Logger('AlAdhanApi/WAF');
+    $wafNamespace = getenv('WAF_PROXY_NAMESPACE');
+    $logger = new Logger($wafNamespace);
     $logger->pushHandler( new StreamHandler('php://stdout', $this->logLevel));
     $logId  = uniqid();
-    $wafNamespace = getenv('WAF_PROXY_NAMESPACE');
 
     $memCached = new Memcached(
         getenv('MEMCACHED_HOST'),
