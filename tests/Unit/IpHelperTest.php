@@ -9,7 +9,7 @@
 namespace Tests\Unit;
 
 
-use IslamicNetwork\Waf\Helper\IpHelper;
+use Vesica\Waf\Helper\IpHelper;
 
 class IpHelperTest extends \PHPUnit\Framework\TestCase
 {

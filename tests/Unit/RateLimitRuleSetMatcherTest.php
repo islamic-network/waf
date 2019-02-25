@@ -1,11 +1,11 @@
 <?php
 namespace Tests\Unit;
 
-use IslamicNetwork\Waf\Cacher\Memcached;
-use IslamicNetwork\Waf\Helper\RateLimitHelper;
-use IslamicNetwork\Waf\Model\RateLimit;
-use IslamicNetwork\Waf\Model\RuleSet;
-use IslamicNetwork\Waf\Model\RuleSetMatcher;
+use Vesica\Waf\Cacher\Memcached;
+use Vesica\Waf\Helper\RateLimitHelper;
+use Vesica\Waf\Model\RateLimit;
+use Vesica\Waf\Model\RuleSet;
+use Vesica\Waf\Model\RuleSetMatcher;
 
 class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 {
@@ -17,7 +17,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/ratelimit.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../config-files/ratelimit.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
 
     }
@@ -37,7 +37,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
         $matched = $this->matcher->getMatched();
         $this->assertEquals('limiter', $matched['name']);
 
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/ratelimit-no-server.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../config-files/ratelimit-no-server.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
 
         $this->matcher = new RuleSetMatcher($this->ruleSet, $this->request, $this->server);
@@ -63,7 +63,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse($this->matcher->isRatelimited());
 
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/ratelimit-no-server.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../config-files/ratelimit-no-server.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
 
         $this->matcher = new RuleSetMatcher($this->ruleSet, $this->request, $this->server);
@@ -133,7 +133,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
         ];
 
         $this->server = [];
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/ratelimit-default-multi.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../config-files/ratelimit-default-multi.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
         $rule = RateLimitHelper::getDefaultRule($this->ruleSet->getRatelimits());
         $hash = RateLimitHelper::getDefaultRateLimitHash($rule, $this->request, $this->server);
@@ -145,7 +145,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
         $matchedKeys = [];
 
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/ratelimit-no-server.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../config-files/ratelimit-no-server.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
         $rule = RateLimitHelper::getDefaultRule($this->ruleSet->getRatelimits());
         $hash = RateLimitHelper::getDefaultRateLimitHash($rule, $this->request, $this->server);
@@ -154,7 +154,7 @@ class RateLimitRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(md5(serialize($matchedKeys)), $hash);
 
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/ratelimit.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../config-files/ratelimit.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
         $rule = RateLimitHelper::getDefaultRule($this->ruleSet->getRatelimits());
         $hash = RateLimitHelper::getDefaultRateLimitHash($rule, $this->request, $this->server);

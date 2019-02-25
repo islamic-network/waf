@@ -1,10 +1,10 @@
 <?php
 
-namespace IslamicNetwork\Waf\Helper;
+namespace Vesica\Waf\Helper;
 
 
-use IslamicNetwork\Waf\Model\RuleSet;
-use IslamicNetwork\Waf\Model\RuleSetMatcher;
+use Vesica\Waf\Model\RuleSet;
+use Vesica\Waf\Model\RuleSetMatcher;
 
 class RateLimitHelper
 {

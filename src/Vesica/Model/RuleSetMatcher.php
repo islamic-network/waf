@@ -1,9 +1,9 @@
 <?php
 
-namespace IslamicNetwork\Waf\Model;
+namespace Vesica\Waf\Model;
 
-use IslamicNetwork\Waf\Helper\IpHelper;
-use IslamicNetwork\Waf\Helper\RateLimitHelper;
+use Vesica\Waf\Helper\IpHelper;
+use Vesica\Waf\Helper\RateLimitHelper;
 
 
 class RuleSetMatcher

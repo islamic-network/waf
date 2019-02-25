@@ -1,6 +1,6 @@
 <?php
 
-namespace IslamicNetwork\Waf\Model;
+namespace Vesica\Waf\Model;
 
 use Symfony\Component\Yaml\Yaml;
 

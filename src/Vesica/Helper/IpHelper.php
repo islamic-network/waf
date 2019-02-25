@@ -1,6 +1,6 @@
 <?php
 
-namespace IslamicNetwork\Waf\Helper;
+namespace Vesica\Waf\Helper;
 
 
 class IpHelper

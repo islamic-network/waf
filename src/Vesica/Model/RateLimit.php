@@ -1,8 +1,8 @@
 <?php
 
-namespace IslamicNetwork\Waf\Model;
+namespace Vesica\Waf\Model;
 
-use IslamicNetwork\Waf\Cacher\Memcached;
+use Vesica\Waf\Cacher\Memcached;
 
 class RateLimit
 {

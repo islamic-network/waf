@@ -1,10 +1,10 @@
 <?php
 
-namespace IslamicNetwork\Waf\Cacher;
+namespace Vesica\Waf\Cacher;
 
 /**
  * Interface Cacher
- * @package IslamicNetwork\Waf\Cacher
+ * @package Vesica\Waf\Cacher
  */
 interface Cacher
 {

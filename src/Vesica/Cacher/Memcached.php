@@ -1,12 +1,12 @@
 <?php
-namespace IslamicNetwork\Waf\Cacher;
+namespace Vesica\Waf\Cacher;
 
 use Cache\Adapter\Memcached\MemcachedCachePool;
 use Cache\Namespaced\NamespacedCachePool;
 
 /**
  * Class Memcached
- * @package IslamicNetwork\Waf\Cacher
+ * @package Vesica\Waf\Cacher
  */
 class Memcached implements Cacher
 {

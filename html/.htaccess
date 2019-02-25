@@ -1,0 +1,7 @@
+#php_value openssl.capath /usr/lib/ssl/certs
+#php_value openssl.cafile /usr/lib/ssl/certs/ca-certificates.crt
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

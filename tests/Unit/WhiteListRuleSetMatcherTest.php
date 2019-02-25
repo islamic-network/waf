@@ -1,8 +1,8 @@
 <?php
 namespace Tests\Unit;
 
-use IslamicNetwork\Waf\Model\RuleSet;
-use IslamicNetwork\Waf\Model\RuleSetMatcher;
+use Vesica\Waf\Model\RuleSet;
+use Vesica\Waf\Model\RuleSetMatcher;
 
 class WhiteListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 {
@@ -14,7 +14,7 @@ class WhiteListRuleSetMatcherTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/whitelist.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../config-files/whitelist.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
 
     }

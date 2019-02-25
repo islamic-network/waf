@@ -1,6 +1,6 @@
 <?php
 
-namespace IslamicNetwork\Waf\Model;
+namespace Vesica\Waf\Model;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
 
@@ -11,7 +11,7 @@ class Config
     public function __construct($pathToConfig)
     {
         $this->pathToConfig = $pathToConfig;
-        
+
     }
 
     public function get()

@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Unit;
 
-use IslamicNetwork\Waf\Model\RuleSet;
+use Vesica\Waf\Model\RuleSet;
 
 class RuleSetTest extends \PHPUnit\Framework\TestCase
 {
@@ -10,7 +10,7 @@ class RuleSetTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $this->ruleSetPath = realpath(__DIR__ . '/../../config/ruleset.yml');
+        $this->ruleSetPath = realpath(__DIR__ . '/../config-files/ruleset.yml');
         $this->ruleSet = new RuleSet($this->ruleSetPath);
     }
 
