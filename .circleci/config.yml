@@ -98,6 +98,22 @@ jobs:
             IMAGE_TAG="${CIRCLE_BUILD_NUM}"
             docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:latest
+  publish-docker-develop:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - setup_remote_docker
+      - run:
+          name: Load archived Docker image
+          command: docker load -i /tmp/workspace/prod.tar
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            IMAGE_TAG="${CIRCLE_BUILD_NUM}"
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
+            docker push $IMAGE_NAME:develop
   publish-docker-tag:
     executor: docker-publisher
     steps:
@@ -152,6 +168,32 @@ workflows:
               only: master
             tags:
               ignore: /.*/
+  build-develop:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: develop
+            tags:
+              ignore: /.*/
+      - build-docker-image:
+          requires:
+            - push-git-tag
+          filters:
+            branches:
+              only: develop
+            tags:
+              ignore: /.*/
+      - publish-docker-develop:
+          context: org-global
+          requires:
+            - build-docker-image
+          filters:
+            branches:
+              only: develop
+            tags:
+              ignore: /.*/
+
   build-tags:
     jobs:
       - test:
