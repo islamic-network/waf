@@ -6,6 +6,8 @@
 
 # A WAF for Developers
 
+**This README file is still a work in progress.**
+
 This is a WAF written in PHP.  To configure and use it, you need to know YAML and understand the various parts of an HTTP request.
 
 It is completely dockerised and to deploy it you will need to run a docker command and specify some environment variables.
@@ -15,6 +17,12 @@ It is completely dockerised and to deploy it you will need to run a docker comma
 This project is stable but has a basic feature set. It also gets updates, often, but a breaking change will go in a new major version.
 
 Some of the things to do are listed under [issues](https://github.com/islamic-network/waf/issues).
+
+## Contributions and Support
+
+Pull requests are always welcome. For feature requests, please feel free to raise an issue.
+
+You can also join the Islamic Network Discord Server to discuss the WAF or any of the other apps or APIs @ https://discord.gg/FwUy69M.
 
 ## Why was it written?
 
@@ -201,4 +209,5 @@ ELSE
     this rule is unmatched (isBlacklisted returns false)
 
 ```
+
 
