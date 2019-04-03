@@ -73,6 +73,11 @@ jobs:
             echo "ci_build: ${CIRCLE_BUILD_NUM}" >> html/VERSION
             echo "ci_workflow: ${CIRCLE_WORKFLOW_ID}" >> html/VERSION
       - run:
+          name: Add Hosts entries to Islamic Network APIs over LAN
+          command: |
+            echo "192.168.2.177 lb01.islamic.network aladhan-api.vafta.paas" >> /etc/hosts
+            echo "192.168.2.180 lb02.islamic.network alquran-api.vafta.paas" >> /etc/hosts
+      - run:
           name: Build Production Docker image
           command: docker build -t $IMAGE_NAME:latest .
       - run:
@@ -95,6 +100,11 @@ jobs:
             echo "branch: ${CIRCLE_BRANCH}" >> html/VERSION
             echo "ci_build: ${CIRCLE_BUILD_NUM}" >> html/VERSION
             echo "ci_workflow: ${CIRCLE_WORKFLOW_ID}" >> html/VERSION
+      - run:
+          name: Add Hosts entries to Islamic Network APIs over LAN
+          command: |
+            echo "192.168.2.177 lb01.vafta.com aladhan-api.vafta.paas" >> /etc/hosts
+            echo "192.168.2.180 lb02.vafta.com alquran-api.vafta.paas" >> /etc/hosts
       - run:
           name: Build Production Docker image
           command: docker build -t $IMAGE_NAME:tag .
