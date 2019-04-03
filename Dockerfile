@@ -13,9 +13,6 @@ RUN a2enmod proxy && \
 
 COPY /etc/apache2/mods-enabled/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf
 
-RUN echo 192.168.2.177 lb01.vafta.com aladhan-api.vafta.paas >> /etc/hosts
-RUN echo 192.168.2.180 lb02.vafta.com alquran-api.vafta.paas >> /etc/hosts
-
 RUN cd ../ && rm -rf /var/www/html
 COPY . /var/www/
 
