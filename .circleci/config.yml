@@ -75,8 +75,8 @@ jobs:
       - run:
           name: Add Hosts entries to Islamic Network APIs over LAN
           command: |
-            echo "192.168.2.177 lb01.islamic.network aladhan-api.vafta.paas" >> /etc/hosts
-            echo "192.168.2.180 lb02.islamic.network alquran-api.vafta.paas" >> /etc/hosts
+            sudo echo "192.168.2.177 lb01.islamic.network aladhan-api.vafta.paas" >> /etc/hosts
+            sudo echo "192.168.2.180 lb02.islamic.network alquran-api.vafta.paas" >> /etc/hosts
       - run:
           name: Build Production Docker image
           command: docker build -t $IMAGE_NAME:latest .
@@ -103,8 +103,8 @@ jobs:
       - run:
           name: Add Hosts entries to Islamic Network APIs over LAN
           command: |
-            echo "192.168.2.177 lb01.vafta.com aladhan-api.vafta.paas" >> /etc/hosts
-            echo "192.168.2.180 lb02.vafta.com alquran-api.vafta.paas" >> /etc/hosts
+            sudo echo "192.168.2.177 lb01.vafta.com aladhan-api.vafta.paas" >> /etc/hosts
+            sudo echo "192.168.2.180 lb02.vafta.com alquran-api.vafta.paas" >> /etc/hosts
       - run:
           name: Build Production Docker image
           command: docker build -t $IMAGE_NAME:tag .
