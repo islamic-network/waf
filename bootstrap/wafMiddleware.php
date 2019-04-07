@@ -72,6 +72,8 @@ $app->add(function (Request $request, Response $response, $next) {
         $logger->debug($logId . ' BLACKLISTED. Blocking.', [$matched['name'], $request->getHeaders(), $server]);
         throw new BlackListException('Blacklisted');
 
+        return;
+
     } elseif ($waf->isRatelimited()) {
 
         $matched = $waf->getMatched();
@@ -83,6 +85,7 @@ $app->add(function (Request $request, Response $response, $next) {
             $logger->debug($logId . ' RATELIMITED.', [$matched['name'], $request->getHeaders(), $server]);
             throw new RateLimitException('Ratelimited');
 
+            return;
         }
 
     } else {
@@ -95,6 +98,8 @@ $app->add(function (Request $request, Response $response, $next) {
 
             $logger->debug($logId . ' DEFAULT RATELIMITED.' . $matched['name'], [$request->getHeaders(), $server]);
             throw new RateLimitException('Default Ratelimited');
+
+            return;
 
         }
     }
