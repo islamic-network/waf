@@ -48,6 +48,8 @@ $app->add(function (Request $request, Response $response, $next) {
         $matched = $waf->getMatched();
         $logger->debug($logId . ' Whitelisted. Passing through.', [$matched['name'], $request->getHeaders(), $server]);
 
+        $response = $next($request, $response);
+
         $response = $response->withHeader('X-WAF-STATUS', 'WHITELISTED');
 
         return $response;
