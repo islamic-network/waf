@@ -29,26 +29,13 @@ $app->add(function (Request $request, Response $response, $next) {
 
     $server = isset($_SERVER) ? $_SERVER : [];
 
-    // Check if rules exist in cache
-    $logger->debug($logId . ' Loading WAF Rules from cache.');
-    $wafRules = $memCached->get('wafruleset');
-
-    if ($wafRules === null) { // There is nothing in the cache
-        $logger->debug($logId . ' WAF Rules not found in cache. Loading from URL.');
-
-        // Load from file
-        $wafRules = new RuleSet(getenv('WAF_CONFIG_URL'));
-        $logger->debug($logId . ' WAF Rules loaded from URL.');
-
-        // Stick them in the cache.
-        $logger->debug($logId . ' Storing rules in cache for 5 mins.');
-        $memCached->set('wafruleset', $wafRules, (int) getenv('WAF_CONFIG_EXPIRY'));
-
-    }
+    // Load from file
+    $wafRules = new RuleSet(getenv('WAF_CONFIG_URL'));
+    $logger->debug($logId . ' WAF Rules loaded from URL.');
 
     if ($wafRules == null || empty($wafRules)) {
         die('Unable to read WAF rules.');
-        $logger->error($logId . ' Unable to read WAF Rules from memcached or ' . getenv('WAF_CONFIG_URL'));
+        $logger->error($logId . ' Unable to read WAF Rules from ' . getenv('WAF_CONFIG_URL'));
     }
     $waf = new RuleSetMatcher($wafRules, $request->getHeaders(), $server);
 

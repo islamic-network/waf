@@ -28,7 +28,6 @@ ENV MEMCACHED_PORT "11211"
 # PROXY BASE URL WITHOUT trailing slash
 ENV PROXY_URL "https://api.aladhan.com"
 ENV WAF_CONFIG_URL "http://vesica.ws/waf.yml"
-ENV WAF_CONFIG_EXPIRY "300"
 ENV WAF_PROXY_NAMESPACE "SomeApiWaf"
 ENV WAF_NAME "VESICA-WAF"
 ENV WAF_KEY "someKeyHere"
