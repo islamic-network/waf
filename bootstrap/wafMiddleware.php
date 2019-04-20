@@ -9,6 +9,7 @@ use Vesica\Waf\Model\RateLimit;
 use Vesica\Waf\Exceptions\BlackListException;
 use Vesica\Waf\Exceptions\RateLimitException;
 use Monolog\Logger;
+use Vesica\Slim\Middleware\Headers\Validate as HeaderValidationMiddleware;
 
 /** Invoke Middleware for Load Balancer Checks */
 $app->add(new HeaderValidationMiddleware(
