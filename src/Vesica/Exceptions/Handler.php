@@ -22,18 +22,29 @@ class Handler
             return $response->withJson(self::ratelimit(), 429);
         }
 
+        $logger = new Logger('AlAdhanApi/WAF');
+        $logger->pushHandler(new StreamHandler('php://stdout', LogLevel::ERROR));
+
+        if ($exception !== null) {
+            $r = [
+                'code' => $exception->getCode(),
+                'status' => $exception->getMessage(),
+                'data' => $exception->getMessage()
+            ];
+
+            $logger->error($exception->getCode() . ' : ' . $exception->getMessage() . ' | ' . $exception->getTraceAsString());
+
+            return $response->withJson($r, $exception->getCode());
+        }
 
         $r = [
             'code' => 500,
             'status' => 'Internal Server Error',
-            'data' => 'Something went wrong when the server tried to process this request. Sorry!'
+            'data' => 'Something went wrong. Sorry, we will investigate.'
         ];
 
-        $logger = new Logger('AlAdhanApi/WAF');
-        $logger->pushHandler( new StreamHandler('php://stdout', LogLevel::ERROR));
-        $logger->error( $exception->getCode() . ' : ' . $exception->getMessage() . ' | ' . $exception->getTraceAsString());
-
         return $response->withJson($r, 500);
+
     }
 
     public function blacklist(): array
