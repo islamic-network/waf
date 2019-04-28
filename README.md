@@ -56,7 +56,7 @@ Because they're easy to use, easy to maintain and easy to manage.
 
 This WAF is production ready and can be deployed as a proxy using the provided Dockerfile or docker-compose file.
 
-You can even use the already published docker image at vesica/proxy.waf.network
+You can even use the already published docker image at quay.io/islamic-network/waf.
 
 
 ## The underlying library and how it works

@@ -2,19 +2,19 @@ version: 2.1
 executors:
   docker-publisher:
     environment:
-      IMAGE_NAME: vesica/proxy.waf.network
+      IMAGE_NAME: quay.io/islamic-network/waf
     docker:
       - image: circleci/buildpack-deps:stretch
   php72:
     docker:
-      - image: vesica/php72
+      - image: quay.io/vesica/php72
     working_directory: ~/repo
 
 jobs:
   test:
     docker:
     # specify the version you desire here
-    - image: vesica/php72
+    - image: quay.io/vesica/php72
     # Memcached container
     - image: memcached:1.5
     working_directory: ~/repo
@@ -140,7 +140,7 @@ jobs:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            echo "$QUAYIO_PASSWORD" | docker login quay.io -u "$QUAYIO_USERNAME" --password-stdin
             IMAGE_TAG="${CIRCLE_BUILD_NUM}"
             docker push $IMAGE_NAME:latest
   publish-docker-develop:
@@ -155,7 +155,7 @@ jobs:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            echo "$QUAYIO_PASSWORD" | docker login quay.io -u "$QUAYIO_USERNAME" --password-stdin
             IMAGE_TAG="${CIRCLE_BUILD_NUM}"
             docker tag $IMAGE_NAME:develop $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:develop
@@ -171,7 +171,7 @@ jobs:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            echo "$QUAYIO_PASSWORD" | docker login quay.io -u "$QUAYIO_USERNAME" --password-stdin
             IMAGE_TAG=${CIRCLE_TAG}
             docker tag $IMAGE_NAME:tag $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:$IMAGE_TAG
