@@ -187,14 +187,14 @@ jobs:
           command: |
             echo "$QUAYIO_PASSWORD" | docker login quay.io -u "$QUAYIO_USERNAME" --password-stdin
             IMAGE_TAG=${CIRCLE_TAG}
-            docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:$IMAGE_TAG
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:$IMAGE_TAG
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$QUAYIO_PASSWORD" | docker login -u "$QUAYIO_USERNAME" --password-stdin
             IMAGE_TAG=${CIRCLE_TAG}
-            docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME_DH:$IMAGE_TAG
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME_DH:$IMAGE_TAG
             docker push $IMAGE_NAME_DH:$IMAGE_TAG
 
 workflows:
