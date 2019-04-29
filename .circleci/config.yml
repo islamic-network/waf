@@ -3,7 +3,7 @@ executors:
   docker-publisher:
     environment:
       IMAGE_NAME: quay.io/islamic-network/waf
-      IMAGE_NAMEDH: islamicnetwork/waf
+      IMAGE_NAME_DH: islamicnetwork/waf
     docker:
       - image: circleci/buildpack-deps:stretch
   php72:
