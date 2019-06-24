@@ -2,7 +2,7 @@
 
 namespace Vesica\Waf\Model;
 
-use Vesica\Waf\Cacher\Memcached;
+use Vesica\Cacher\Memcached;
 
 class RateLimit
 {
