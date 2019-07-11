@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d1e737aac5f7883f9c8d26c082beec8",
+    "content-hash": "1e566bdda07dd8bcc496d5a3e9e2ccf7",
     "packages": [
         {
             "name": "cache/cache",
@@ -1303,16 +1303,16 @@
         },
         {
             "name": "vesica/proxy",
-            "version": "dev-master",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vesica/php-proxy.git",
-                "reference": "167bc0320f511d336c103bdf3ef27e78043b0d48"
+                "reference": "0dc70b2ecb09df19489cc5d3f483e30ac41a9a35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vesica/php-proxy/zipball/167bc0320f511d336c103bdf3ef27e78043b0d48",
-                "reference": "167bc0320f511d336c103bdf3ef27e78043b0d48",
+                "url": "https://api.github.com/repos/vesica/php-proxy/zipball/0dc70b2ecb09df19489cc5d3f483e30ac41a9a35",
+                "reference": "0dc70b2ecb09df19489cc5d3f483e30ac41a9a35",
                 "shasum": ""
             },
             "require": {
@@ -1359,9 +1359,9 @@
                 "proxy"
             ],
             "support": {
-                "source": "https://github.com/vesica/php-proxy/tree/master"
+                "source": "https://github.com/vesica/php-proxy/tree/v3.0.4"
             },
-            "time": "2019-07-11T11:30:30+00:00"
+            "time": "2019-07-11T13:51:16+00:00"
         },
         {
             "name": "vesica/slim-middlewares",
@@ -2984,9 +2984,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "vesica/proxy": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
