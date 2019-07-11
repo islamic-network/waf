@@ -25,6 +25,8 @@ $app->add(function (Request $request, Response $response, $next) {
 
     // Add headers to request
     $request = $request->withAddedHeader('X-WAF-KEY', getenv('WAF_KEY'));
+    $request = $request->withAddedHeader('User-Agent', 'VesicaWAF/1.0 ');
+    $request = $request->withAddedHeader('X-LOAD-BALANCER', $request->getHeader('X-LOAD-BALANCER'));
 
     $wafNamespace = getenv('WAF_PROXY_NAMESPACE');
     $logger = new Logger($wafNamespace);

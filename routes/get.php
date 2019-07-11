@@ -22,7 +22,6 @@ $app->get('/[{path:.*}]', function (Request $request, Response $response, $args)
             ->forward($request)
             ->filter(function (Request $request, Response $response, $next) {
                 // Manipulate the request object.
-                $request = $request->withAddedHeader('User-Agent', 'VesicaWAF/1.0 ');
                 $request = $request->withHeader('X-Forwarded-For', $request->getHeader('X-Forwarded-For'));
 
                 // Call the next item in the middleware.
