@@ -1,4 +1,4 @@
-FROM quay.io/vesica/php73:dev
+FROM quay.io/vesica/php73:latest
 
 RUN a2enmod proxy && \
   a2enmod proxy_http && \
