@@ -2,7 +2,7 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Monolog\Handler\StreamHandler;
-use Vesica\Waf\Cacher\Memcached;
+use Vesica\Cacher\Memcached;
 use Vesica\Waf\Model\RuleSet;
 use Vesica\Waf\Model\RuleSetMatcher;
 use Vesica\Waf\Model\RateLimit;

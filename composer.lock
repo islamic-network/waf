@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dcc600a6f1628daa147643c838aef88",
+    "content-hash": "07c06203fa5976c2bce5fbc5e2201156",
     "packages": [
         {
             "name": "cache/cache",
@@ -1192,7 +1192,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -1263,6 +1263,39 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2019-03-30T15:58:42+00:00"
+        },
+        {
+            "name": "vesica/cacher",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vesica/cacher.git",
+                "reference": "5848c62c962bd1d0e1c404484be5c80fae080f92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vesica/cacher/zipball/5848c62c962bd1d0e1c404484be5c80fae080f92",
+                "reference": "5848c62c962bd1d0e1c404484be5c80fae080f92",
+                "shasum": ""
+            },
+            "require": {
+                "cache/cache": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vesica\\Cacher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "A simplified caching library built on top of php-cache",
+            "time": "2019-06-24T10:31:17+00:00"
         },
         {
             "name": "vesica/proxy",

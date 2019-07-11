@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Unit;
 
-use Vesica\Waf\Cacher\Memcached;
+use Vesica\Cacher\Memcached;
 use Vesica\Waf\Helper\RateLimitHelper;
 use Vesica\Waf\Model\RateLimit;
 use Vesica\Waf\Model\RuleSet;

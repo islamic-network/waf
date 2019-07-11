@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Unit;
 
-use Vesica\Waf\Cacher\Memcached;
+use Vesica\Cacher\Memcached;
 
 class MemcachedTest extends \PHPUnit\Framework\TestCase
 {
