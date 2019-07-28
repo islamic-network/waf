@@ -27,7 +27,7 @@ class Handler
 
         if ($exception !== null) {
             $r = [
-                'code' => $exception->getCode(),
+                'code' => 500,
                 'status' => $exception->getMessage(),
                 'data' => $exception->getMessage()
             ];

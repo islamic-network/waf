@@ -11,15 +11,6 @@ use Vesica\Waf\Exceptions\RateLimitException;
 use Monolog\Logger;
 use Vesica\Slim\Middleware\Headers\Validate as HeaderValidationMiddleware;
 
-/** Invoke Middleware for Load Balancer Checks */
-$app->add(new HeaderValidationMiddleware(
-        (bool) getenv('LOAD_BALANCER_MODE'),
-        'X-LOAD-BALANCER',
-        getenv('LOAD_BALANCER_KEY'),
-        'Invalid Load Balancer Key.'
-    )
-);
-
 /** Invoke Middleware for WAF Checks */
 $app->add(function (Request $request, Response $response, $next) {
 
