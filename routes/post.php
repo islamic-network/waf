@@ -22,7 +22,9 @@ $app->post('/[{path:.*}]', function (Request $request, Response $response, $args
             ->forward($request)
             ->filter(function (Request $request, Response $response, $next) {
                 // Manipulate the request object.
-                $request = $request->withHeader('X-Forwarded-For', $request->getHeader('X-Forwarded-For'));
+                if (!empty($request->getHeader('X-Forwarded-For'))) {
+                    $request = $request->withHeader('X-Forwarded-For', $request->getHeader('X-Forwarded-For'));
+                }
 
                 // Call the next item in the middleware.
                 $response = $next($request, $response);
