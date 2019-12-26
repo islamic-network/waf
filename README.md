@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/islamic-network/waf.svg?style=shield)](https://circleci.com/gh/islamic-network/waf) 
 [![](https://img.shields.io/github/release/islamic-network/waf.svg)](https://github.com/islamic-network/waf/releases)
+![Docker Pulls](https://img.shields.io/docker/pulls/islamicnetwork/waf)
 [![](https://img.shields.io/github/license/islamic-network/waf.svg)](https://github.com/islamic-network/waf/blob/master/LICENSE)
 
 # A WAF for Developers
