@@ -1,4 +1,4 @@
-FROM quay.io/vesica/php73:latest
+FROM islamicnetwork/php73:latest
 
 COPY /etc/apache2/mods-enabled/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf
 
