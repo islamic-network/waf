@@ -5,6 +5,9 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/islamicnetwork/waf)
 [![](https://img.shields.io/github/license/islamic-network/waf.svg)](https://github.com/islamic-network/waf/blob/master/LICENSE)
 
+### Deprecation Notice
+As of May 15, 2020, this project is marked as deprecated. Whilst it works just fine, running it at scale is extremely expensive. A request takes 30 MB to process and 2% of the CPU. This means that on a $10 server on DO or Linode you can only serve 35 requests - so to service about 300 requests a second you would need $100+ in servers. This problem can be fixed by taking the flexibility from the YAML file parser to allow exact matches as opposed to strings contained in the headers - but that flexibity is what made this very useful. If we have to implement exact matches, then it is probably best done as a module for Apache, Nginx, or Kong API Gateway.
+
 # A WAF for Developers
 
 **This README file is still a work in progress.**
