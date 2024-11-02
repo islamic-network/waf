@@ -26,8 +26,6 @@ Some of the things to do are listed under [issues](https://github.com/islamic-ne
 
 Pull requests are always welcome. For feature requests, please feel free to raise an issue.
 
-You can also join the Islamic Network Discord Server to discuss the WAF or any of the other apps or APIs @ https://discord.gg/FwUy69M.
-
 ## Why was it written?
 
 We needed a WAF for the AlAdhan API.
